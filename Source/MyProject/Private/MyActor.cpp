@@ -25,3 +25,20 @@ void AMyActor::Tick(float DeltaTime)
 
 }
 
+float AMyActor::getHealth()
+{
+	return health;
+}
+
+void AMyActor::setHealth(float _health)
+{
+	if (_health > maxHealth) {
+		_health = maxHealth;
+	}
+	else if (_health < 0) {
+		_health = 0;
+	}
+
+	health = _health;
+}
+

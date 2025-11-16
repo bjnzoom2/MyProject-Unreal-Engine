@@ -19,8 +19,17 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	float health = 100;
+	const float maxHealth = 100;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintPure)
+	float getHealth();
+
+	UFUNCTION(BlueprintCallable)
+	void setHealth(float _health);
 };
