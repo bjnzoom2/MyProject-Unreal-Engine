@@ -6,6 +6,25 @@
 #include "GameFramework/Actor.h"
 #include "MyActor.generated.h"
 
+UENUM(BlueprintType)
+enum TestEnum {
+	apple,
+	banana,
+	pear UMETA(DisplayName="Pear_1")
+};
+
+USTRUCT(BlueprintType)
+struct FTestStruct {
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int value = 10;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float value2 = 9.8;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	FString string = "String";
+};
+
 UCLASS()
 class MYPROJECT_API AMyActor : public AActor
 {
@@ -32,4 +51,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void setHealth(float _health);
+
+	UFUNCTION(BlueprintCallable)
+	static void printStr(UPARAM(ref)FTestStruct& testStruct, UObject* context);
 };

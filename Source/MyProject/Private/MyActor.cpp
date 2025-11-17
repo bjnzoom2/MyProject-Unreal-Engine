@@ -2,6 +2,7 @@
 
 
 #include "MyActor.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 AMyActor::AMyActor()
@@ -40,5 +41,10 @@ void AMyActor::setHealth(float _health)
 	}
 
 	health = _health;
+}
+
+void AMyActor::printStr(UPARAM(ref)FTestStruct& testStruct, UObject* context)
+{
+	UKismetSystemLibrary::PrintString(context, testStruct.string);
 }
 
