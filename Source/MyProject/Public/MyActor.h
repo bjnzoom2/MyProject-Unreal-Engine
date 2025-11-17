@@ -8,8 +8,8 @@
 
 UENUM(BlueprintType)
 enum TestEnum {
-	apple,
-	banana,
+	apple UMETA(DisplayName = "Apple_1"),
+	banana UMETA(DisplayName = "Apple_1"),
 	pear UMETA(DisplayName="Pear_1")
 };
 

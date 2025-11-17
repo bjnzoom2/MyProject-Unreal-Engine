@@ -45,7 +45,9 @@ void EmptyLinkFunctionForGeneratedCodeMyActor() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_MyProject_TestEnum_Statics::Enum_MetaDataParams[] = {
+		{ "apple.DisplayName", "Apple_1" },
 		{ "apple.Name", "apple" },
+		{ "banana.DisplayName", "Apple_1" },
 		{ "banana.Name", "banana" },
 		{ "BlueprintType", "true" },
 		{ "ModuleRelativePath", "Public/MyActor.h" },
@@ -376,7 +378,7 @@ template<> MYPROJECT_API UScriptStruct* StaticStruct<FTestStruct>()
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::EnumInfo[] = {
-		{ TestEnum_StaticEnum, TEXT("TestEnum"), &Z_Registration_Info_UEnum_TestEnum, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1316401368U) },
+		{ TestEnum_StaticEnum, TEXT("TestEnum"), &Z_Registration_Info_UEnum_TestEnum, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2808645967U) },
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::ScriptStructInfo[] = {
 		{ FTestStruct::StaticStruct, Z_Construct_UScriptStruct_FTestStruct_Statics::NewStructOps, TEXT("TestStruct"), &Z_Registration_Info_UScriptStruct_TestStruct, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FTestStruct), 2460979181U) },
@@ -384,7 +386,7 @@ template<> MYPROJECT_API UScriptStruct* StaticStruct<FTestStruct>()
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_AMyActor, AMyActor::StaticClass, TEXT("AMyActor"), &Z_Registration_Info_UClass_AMyActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyActor), 3211192429U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_342223182(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_596713797(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyActor_h_Statics::EnumInfo));
