@@ -3,6 +3,7 @@
 
 #include "MyActor.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetStringLibrary.h"
 
 // Sets default values
 AMyActor::AMyActor()
@@ -16,7 +17,7 @@ AMyActor::AMyActor()
 void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	UKismetSystemLibrary::PrintString(this, "Instantiated");
 }
 
 // Called every frame
@@ -26,25 +27,21 @@ void AMyActor::Tick(float DeltaTime)
 
 }
 
-float AMyActor::getHealth()
+void AMyActor::CollisionAction(AActor* otherActor)
 {
-	return health;
-}
+	if (!Cast<APawn>(otherActor)) { return; }
+	TArray<UActorComponent*> components;
+	this->GetComponents(components);
 
-void AMyActor::setHealth(float _health)
-{
-	if (_health > maxHealth) {
-		_health = maxHealth;
+	for (UActorComponent* component : components) {
+		UStaticMeshComponent* staticMeshComponent = Cast<UStaticMeshComponent>(component);
+		if (staticMeshComponent) {
+			FVector componentLocation = staticMeshComponent->GetComponentLocation();
+			FVector spawnLocation = componentLocation + FVector(0.0, 0.0, 1000.0);
+			FActorSpawnParameters params;
+			params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+			GetWorld()->SpawnActor<AMyActor>(BPActor, spawnLocation, FRotator::ZeroRotator, params);
+		}
 	}
-	else if (_health < 0) {
-		_health = 0;
-	}
-
-	health = _health;
 }
-
-void AMyActor::printStr(UPARAM(ref)FTestStruct& testStruct, UObject* context)
-{
-	UKismetSystemLibrary::PrintString(context, testStruct.string);
-}
-
