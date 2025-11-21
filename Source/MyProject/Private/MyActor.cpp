@@ -36,6 +36,7 @@ void AMyActor::CollisionAction(AActor* otherActor)
 	for (UActorComponent* component : components) {
 		UStaticMeshComponent* staticMeshComponent = Cast<UStaticMeshComponent>(component);
 		if (staticMeshComponent) {
+			UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_NameToString(otherActor->GetFName()));
 			FVector componentLocation = staticMeshComponent->GetComponentLocation();
 			FVector spawnLocation = componentLocation + FVector(0.0, 0.0, 1000.0);
 			FActorSpawnParameters params;
