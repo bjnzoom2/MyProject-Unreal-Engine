@@ -62,10 +62,16 @@
     <ClCompile Include="..\..\Source\MyProject\Private\MyActor.cpp">
       <Filter>Source\MyProject\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MyProject\Private\MyCharacter.cpp">
+      <Filter>Source\MyProject\Private</Filter>
+    </ClCompile>
     <Filter Include="Source\MyProject\Public">
       <UniqueIdentifier>{17AF90F8-BCFF-35EC-B42A-50C00E45B19B}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\MyProject\Public\MyActor.h">
+      <Filter>Source\MyProject\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MyProject\Public\MyCharacter.h">
       <Filter>Source\MyProject\Public</Filter>
     </ClInclude>
   </ItemGroup>

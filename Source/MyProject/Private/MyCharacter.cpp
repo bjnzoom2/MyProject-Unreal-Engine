@@ -2,6 +2,8 @@
 
 
 #include "MyCharacter.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetStringLibrary.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -30,5 +32,33 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMyCharacter::MoveAlongForwardVector(USkeletalMeshComponent* skeletalMesh, float AxisValue)
+{
+	if (skeletalMesh) {
+		FVector rightVector = skeletalMesh->GetRightVector();
+
+		AddMovementInput(rightVector, AxisValue);
+	}
+}
+
+void AMyCharacter::MoveAlongRightVector(USkeletalMeshComponent* skeletalMesh, float AxisValue)
+{
+	if (skeletalMesh) {
+		FVector forwardVector = skeletalMesh->GetForwardVector();
+
+		AddMovementInput(forwardVector, -AxisValue);
+	}
+}
+
+void AMyCharacter::PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState)
+{
+	FVector pickUpLocation = skeletalMesh->GetRightVector() * 200;
+	UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_VectorToString(pickUpLocation));
+	if (!pickupState) {
+		otherActor->SetActorLocation(pickUpLocation);
+	}
+	pickupState = !pickupState;
 }
 

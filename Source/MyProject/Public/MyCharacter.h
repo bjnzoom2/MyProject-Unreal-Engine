@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -26,4 +27,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable)
+	void MoveAlongForwardVector(USkeletalMeshComponent* skeletalMesh, float AxisValue);
+
+	UFUNCTION(BlueprintCallable)
+	void MoveAlongRightVector(USkeletalMeshComponent* skeletalMesh, float AxisValue);
+
+	UFUNCTION(BlueprintCallable)
+	void PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState);
 };
