@@ -54,11 +54,22 @@ void AMyCharacter::MoveAlongRightVector(USkeletalMeshComponent* skeletalMesh, fl
 
 void AMyCharacter::PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState)
 {
-	FVector pickUpLocation = skeletalMesh->GetRightVector() * 200;
-	UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_VectorToString(pickUpLocation));
-	if (!pickupState) {
-		otherActor->SetActorLocation(pickUpLocation);
+	if (Cast<APawn>(otherActor)) return;
+	TArray<UActorComponent*> components;
+	FVector pickUpLocation = skeletalMesh->GetRightVector() * 200 + (skeletalMesh->GetComponentLocation() + FVector(0.0, 0.0, 42.5));
+	FRotator pickUpRotation = skeletalMesh->GetComponentRotation();
+	otherActor->GetComponents(components);
+	for (UActorComponent* component : components) {
+		UStaticMeshComponent* otherActorMesh = Cast<UStaticMeshComponent>(component);
+		if (otherActorMesh) {
+			if (pickupState) {
+				otherActorMesh->SetSimulatePhysics(false);
+				otherActorMesh->SetWorldLocationAndRotation(pickUpLocation, pickUpRotation);
+			}
+			else {
+				otherActorMesh->SetSimulatePhysics(true);
+			}
+		}
 	}
-	pickupState = !pickupState;
 }
 
