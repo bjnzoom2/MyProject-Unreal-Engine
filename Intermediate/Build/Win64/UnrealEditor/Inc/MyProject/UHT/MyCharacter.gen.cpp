@@ -11,11 +11,21 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API UClass* Z_Construct_UClass_UCharacterMovementComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_MyProject();
 // End Cross Module References
+	DEFINE_FUNCTION(AMyCharacter::execChangeMovement)
+	{
+		P_GET_OBJECT(UCharacterMovementComponent,Z_Param_movementComponent);
+		P_GET_UBOOL(Z_Param_flyState);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ChangeMovement(Z_Param_movementComponent,Z_Param_flyState);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execPickUp)
 	{
 		P_GET_OBJECT(USkeletalMeshComponent,Z_Param_skeletalMesh);
@@ -48,11 +58,63 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	{
 		UClass* Class = AMyCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ChangeMovement", &AMyCharacter::execChangeMovement },
 			{ "MoveAlongForwardVector", &AMyCharacter::execMoveAlongForwardVector },
 			{ "MoveAlongRightVector", &AMyCharacter::execMoveAlongRightVector },
 			{ "PickUp", &AMyCharacter::execPickUp },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics
+	{
+		struct MyCharacter_eventChangeMovement_Parms
+		{
+			UCharacterMovementComponent* movementComponent;
+			bool flyState;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_movementComponent_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_movementComponent;
+		static void NewProp_flyState_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_flyState;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_movementComponent_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_movementComponent = { "movementComponent", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventChangeMovement_Parms, movementComponent), Z_Construct_UClass_UCharacterMovementComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_movementComponent_MetaData), Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_movementComponent_MetaData) };
+	void Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_flyState_SetBit(void* Obj)
+	{
+		((MyCharacter_eventChangeMovement_Parms*)Obj)->flyState = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_flyState = { "flyState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(MyCharacter_eventChangeMovement_Parms), &Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_flyState_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_movementComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::NewProp_flyState,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "ChangeMovement", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::MyCharacter_eventChangeMovement_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::MyCharacter_eventChangeMovement_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AMyCharacter_ChangeMovement()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_ChangeMovement_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector_Statics
 	{
@@ -222,6 +284,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AMyCharacter_ChangeMovement, "ChangeMovement" }, // 3224966102
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3208580770
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 246958097
 		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 3745757103
@@ -271,9 +334,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 315568573U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3768693256U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1149630414(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1866169281(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -73,3 +73,13 @@ void AMyCharacter::PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherAct
 	}
 }
 
+void AMyCharacter::ChangeMovement(UCharacterMovementComponent* movementComponent, bool flyState)
+{
+	if (flyState) {
+		movementComponent->SetMovementMode(MOVE_Flying);
+	}
+	else {
+		movementComponent->SetMovementMode(MOVE_Walking);
+	}
+}
+

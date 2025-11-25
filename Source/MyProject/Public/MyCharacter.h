@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "InputActionValue.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -35,4 +35,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState);
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeMovement(UCharacterMovementComponent* movementComponent, bool flyState);
 };
