@@ -34,6 +34,9 @@ public:
 	void MoveAlongRightVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
+	void MoveAlongUpVector(float AxisValue);
+
+	UFUNCTION(BlueprintCallable)
 	void PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState);
 
 	UFUNCTION(BlueprintCallable)

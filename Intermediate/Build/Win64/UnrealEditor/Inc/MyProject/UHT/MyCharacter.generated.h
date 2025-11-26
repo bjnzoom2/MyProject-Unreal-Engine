@@ -23,6 +23,7 @@ class USkeletalMeshComponent;
  \
 	DECLARE_FUNCTION(execFly); \
 	DECLARE_FUNCTION(execPickUp); \
+	DECLARE_FUNCTION(execMoveAlongUpVector); \
 	DECLARE_FUNCTION(execMoveAlongRightVector); \
 	DECLARE_FUNCTION(execMoveAlongForwardVector);
 

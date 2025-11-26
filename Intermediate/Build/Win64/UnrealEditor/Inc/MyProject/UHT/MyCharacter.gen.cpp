@@ -33,6 +33,14 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->PickUp(Z_Param_skeletalMesh,Z_Param_otherActor,Z_Param_Out_pickupState);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execMoveAlongUpVector)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_AxisValue);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MoveAlongUpVector(Z_Param_AxisValue);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execMoveAlongRightVector)
 	{
 		P_GET_PROPERTY(FFloatProperty,Z_Param_AxisValue);
@@ -56,6 +64,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "Fly", &AMyCharacter::execFly },
 			{ "MoveAlongForwardVector", &AMyCharacter::execMoveAlongForwardVector },
 			{ "MoveAlongRightVector", &AMyCharacter::execMoveAlongRightVector },
+			{ "MoveAlongUpVector", &AMyCharacter::execMoveAlongUpVector },
 			{ "PickUp", &AMyCharacter::execPickUp },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -150,6 +159,40 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics
+	{
+		struct MyCharacter_eventMoveAlongUpVector_Parms
+		{
+			float AxisValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_AxisValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::NewProp_AxisValue = { "AxisValue", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventMoveAlongUpVector_Parms, AxisValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::NewProp_AxisValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "MoveAlongUpVector", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::MyCharacter_eventMoveAlongUpVector_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::MyCharacter_eventMoveAlongUpVector_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AMyCharacter_PickUp_Statics
 	{
 		struct MyCharacter_eventPickUp_Parms
@@ -229,6 +272,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_Fly, "Fly" }, // 1606461507
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
+		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
 		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 3745757103
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::FuncInfo) < 2048);
@@ -276,9 +320,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2428930773U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2974066240U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1119075906(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2655345785(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

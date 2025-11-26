@@ -52,6 +52,15 @@ void AMyCharacter::MoveAlongRightVector(float AxisValue)
 	}
 }
 
+void AMyCharacter::MoveAlongUpVector(float AxisValue)
+{
+	if (GetMesh()) {
+		FVector upVector = GetMesh()->GetUpVector();
+
+		AddMovementInput(upVector, AxisValue);
+	}
+}
+
 void AMyCharacter::PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState)
 {
 	if (Cast<APawn>(otherActor)) return;
