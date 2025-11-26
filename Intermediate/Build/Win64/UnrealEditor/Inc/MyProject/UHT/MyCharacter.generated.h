@@ -10,7 +10,6 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
-class UCharacterMovementComponent;
 class USkeletalMeshComponent;
 #ifdef MYPROJECT_MyCharacter_generated_h
 #error "MyCharacter.generated.h already included, missing '#pragma once' in MyCharacter.h"
@@ -22,7 +21,7 @@ class USkeletalMeshComponent;
 #define FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_13_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execChangeMovement); \
+	DECLARE_FUNCTION(execFly); \
 	DECLARE_FUNCTION(execPickUp); \
 	DECLARE_FUNCTION(execMoveAlongRightVector); \
 	DECLARE_FUNCTION(execMoveAlongForwardVector);

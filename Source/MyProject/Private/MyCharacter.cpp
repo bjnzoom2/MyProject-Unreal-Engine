@@ -34,19 +34,19 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
-void AMyCharacter::MoveAlongForwardVector(USkeletalMeshComponent* skeletalMesh, float AxisValue)
+void AMyCharacter::MoveAlongForwardVector(float AxisValue)
 {
-	if (skeletalMesh) {
-		FVector rightVector = skeletalMesh->GetRightVector();
+	if (GetMesh()) {
+		FVector rightVector = GetMesh()->GetRightVector();
 
 		AddMovementInput(rightVector, AxisValue);
 	}
 }
 
-void AMyCharacter::MoveAlongRightVector(USkeletalMeshComponent* skeletalMesh, float AxisValue)
+void AMyCharacter::MoveAlongRightVector(float AxisValue)
 {
-	if (skeletalMesh) {
-		FVector forwardVector = skeletalMesh->GetForwardVector();
+	if (GetMesh()) {
+		FVector forwardVector = GetMesh()->GetForwardVector();
 
 		AddMovementInput(forwardVector, -AxisValue);
 	}
@@ -73,13 +73,13 @@ void AMyCharacter::PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherAct
 	}
 }
 
-void AMyCharacter::ChangeMovement(UCharacterMovementComponent* movementComponent, bool flyState)
+void AMyCharacter::Fly()
 {
-	if (flyState) {
-		movementComponent->SetMovementMode(MOVE_Flying);
+	if (GetCharacterMovement()->IsFalling()) {
+		GetCharacterMovement()->SetMovementMode(MOVE_Flying);
 	}
-	else {
-		movementComponent->SetMovementMode(MOVE_Walking);
+	else if (GetCharacterMovement()->IsFlying()) {
+		GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	}
 }
 

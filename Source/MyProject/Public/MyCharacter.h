@@ -28,14 +28,14 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-	void MoveAlongForwardVector(USkeletalMeshComponent* skeletalMesh, float AxisValue);
+	void MoveAlongForwardVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void MoveAlongRightVector(USkeletalMeshComponent* skeletalMesh, float AxisValue);
+	void MoveAlongRightVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
 	void PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState);
 
 	UFUNCTION(BlueprintCallable)
-	void ChangeMovement(UCharacterMovementComponent* movementComponent, bool flyState);
+	void Fly();
 };
