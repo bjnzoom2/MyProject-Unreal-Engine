@@ -38,7 +38,7 @@ public:
 	void MoveAlongUpVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void Dash(UCameraComponent* camera);
+	void Dash(UCameraComponent* camera, UPARAM(ref)bool& canDash);
 
 	UFUNCTION(BlueprintCallable)
 	void PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState);

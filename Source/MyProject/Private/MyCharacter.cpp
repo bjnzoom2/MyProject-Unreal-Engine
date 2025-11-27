@@ -60,14 +60,15 @@ void AMyCharacter::MoveAlongUpVector(float AxisValue)
 	}
 }
 
-void AMyCharacter::Dash(UCameraComponent* camera)
+void AMyCharacter::Dash(UCameraComponent* camera, UPARAM(ref)bool& canDash)
 {
-	if (GetMesh()) {
-		if (GetCharacterMovement()->IsFlying()) return;
+	if (GetMesh() && !GetCharacterMovement()->IsFlying()) {
+		if (!GetCharacterMovement()->IsFalling()) canDash = true;
+		if (!canDash) return;
 		FVector dashVector = camera->GetForwardVector();
-		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_VectorToString(dashVector));
 		
-		LaunchCharacter(dashVector * 1500, true, true);
+		LaunchCharacter(dashVector * 1250, true, true);
+		canDash = false;
 	}
 }
 
