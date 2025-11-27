@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/CameraComponent.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -37,7 +38,10 @@ public:
 	void MoveAlongUpVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState);
+	void Dash(UCameraComponent* camera);
+
+	UFUNCTION(BlueprintCallable)
+	void PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState);
 
 	UFUNCTION(BlueprintCallable)
 	void Fly();

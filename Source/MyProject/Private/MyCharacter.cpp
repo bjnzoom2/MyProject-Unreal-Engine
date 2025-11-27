@@ -17,7 +17,6 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -61,22 +60,29 @@ void AMyCharacter::MoveAlongUpVector(float AxisValue)
 	}
 }
 
-void AMyCharacter::PickUp(USkeletalMeshComponent* skeletalMesh, AActor* otherActor, UPARAM(ref)bool& pickupState)
+void AMyCharacter::Dash(UCameraComponent* camera)
+{
+	if (GetMesh()) {
+		if (GetCharacterMovement()->IsFlying()) return;
+		FVector dashVector = camera->GetForwardVector();
+		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_VectorToString(dashVector));
+		
+		LaunchCharacter(dashVector * 1500, true, true);
+	}
+}
+
+void AMyCharacter::PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState)
 {
 	if (Cast<APawn>(otherActor)) return;
 	TArray<UActorComponent*> components;
-	FVector pickUpLocation = skeletalMesh->GetRightVector() * 200 + (skeletalMesh->GetComponentLocation() + FVector(0.0, 0.0, 42.5));
-	FRotator pickUpRotation = skeletalMesh->GetComponentRotation();
+	FVector pickUpLocation = GetMesh()->GetRightVector() * 200 + (GetMesh()->GetComponentLocation() + FVector(0.0, 0.0, 42.5));
+	FRotator pickUpRotation = GetMesh()->GetComponentRotation();
 	otherActor->GetComponents(components);
 	for (UActorComponent* component : components) {
 		UStaticMeshComponent* otherActorMesh = Cast<UStaticMeshComponent>(component);
 		if (otherActorMesh) {
 			if (pickupState) {
-				otherActorMesh->SetSimulatePhysics(false);
-				otherActorMesh->SetWorldLocationAndRotation(pickUpLocation, pickUpRotation);
-			}
-			else {
-				otherActorMesh->SetSimulatePhysics(true);
+				otherActorMesh->SetWorldLocationAndRotationNoPhysics(pickUpLocation, pickUpRotation);
 			}
 		}
 	}
