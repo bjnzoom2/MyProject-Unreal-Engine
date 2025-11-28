@@ -10,7 +10,7 @@ AMyCharacter::AMyCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	bCanDash = false;
 }
 
 // Called when the game starts or when spawned
@@ -23,7 +23,6 @@ void AMyCharacter::BeginPlay()
 void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -60,16 +59,18 @@ void AMyCharacter::MoveAlongUpVector(float AxisValue)
 	}
 }
 
-void AMyCharacter::Dash(UCameraComponent* camera, UPARAM(ref)bool& canDash)
+void AMyCharacter::Dash(UCameraComponent* camera)
 {
-	if (GetMesh() && !GetCharacterMovement()->IsFlying()) {
-		if (!GetCharacterMovement()->IsFalling()) canDash = true;
-		if (!canDash) return;
+	if (!GetMesh() || GetCharacterMovement()->IsFlying()) return;
+	bool grounded = !GetCharacterMovement()->IsFalling();
+	if (!grounded && !bCanDash) return;
+
+	if (camera) {
 		FVector dashVector = camera->GetForwardVector();
-		
 		LaunchCharacter(dashVector * 1250, true, true);
-		canDash = false;
 	}
+
+	bCanDash = false;
 }
 
 void AMyCharacter::PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState)
@@ -83,7 +84,11 @@ void AMyCharacter::PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState)
 		UStaticMeshComponent* otherActorMesh = Cast<UStaticMeshComponent>(component);
 		if (otherActorMesh) {
 			if (pickupState) {
-				otherActorMesh->SetWorldLocationAndRotationNoPhysics(pickUpLocation, pickUpRotation);
+				if (otherActorMesh->IsSimulatingPhysics()) otherActorMesh->SetSimulatePhysics(false);
+				otherActorMesh->SetWorldLocationAndRotation(pickUpLocation, pickUpRotation);
+			}
+			else if (!otherActorMesh->IsSimulatingPhysics()) {
+				otherActorMesh->SetSimulatePhysics(true);
 			}
 		}
 	}

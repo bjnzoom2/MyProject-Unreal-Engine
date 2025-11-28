@@ -28,6 +28,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bCanDash;
+
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
 
@@ -38,7 +41,7 @@ public:
 	void MoveAlongUpVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void Dash(UCameraComponent* camera, UPARAM(ref)bool& canDash);
+	void Dash(UCameraComponent* camera);
 
 	UFUNCTION(BlueprintCallable)
 	void PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState);
