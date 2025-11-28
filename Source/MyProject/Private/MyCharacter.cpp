@@ -11,6 +11,7 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	bCanDash = false;
+	bPickupState = false;
 }
 
 // Called when the game starts or when spawned
@@ -67,16 +68,17 @@ void AMyCharacter::Dash(UCameraComponent* camera)
 
 	if (camera) {
 		FVector dashVector = camera->GetForwardVector();
-		dashVector.X *= 4.0;
-		dashVector.Y *= 4.0;
-		//GetVelocity();
+		FVector velocityVector = GetVelocity();
+		dashVector.X *= 4.8;
+		dashVector.Y *= 4.8;
 		LaunchCharacter(dashVector * 1250.0, false, false);
+		//LaunchCharacter({ velocityVector.X * 10.0, velocityVector.Y * 10.0, 0 }, false, false);
 	}
 
 	bCanDash = false;
 }
 
-void AMyCharacter::PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState)
+void AMyCharacter::PickUp(AActor* otherActor)
 {
 	if (Cast<APawn>(otherActor)) return;
 	TArray<UActorComponent*> components;
@@ -86,7 +88,7 @@ void AMyCharacter::PickUp(AActor* otherActor, UPARAM(ref)bool& pickupState)
 	for (UActorComponent* component : components) {
 		UStaticMeshComponent* otherActorMesh = Cast<UStaticMeshComponent>(component);
 		if (otherActorMesh) {
-			if (pickupState) {
+			if (bPickupState) {
 				if (otherActorMesh->IsSimulatingPhysics()) otherActorMesh->SetSimulatePhysics(false);
 				otherActorMesh->SetWorldLocationAndRotation(pickUpLocation, pickUpRotation);
 			}
