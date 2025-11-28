@@ -67,7 +67,10 @@ void AMyCharacter::Dash(UCameraComponent* camera)
 
 	if (camera) {
 		FVector dashVector = camera->GetForwardVector();
-		LaunchCharacter(dashVector * 1250, true, true);
+		dashVector.X *= 4.0;
+		dashVector.Y *= 4.0;
+		//GetVelocity();
+		LaunchCharacter(dashVector * 1250.0, false, false);
 	}
 
 	bCanDash = false;
