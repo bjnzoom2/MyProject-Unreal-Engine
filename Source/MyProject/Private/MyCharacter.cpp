@@ -78,8 +78,9 @@ void AMyCharacter::Dash(UCameraComponent* camera)
 	bCanDash = false;
 }
 
-void AMyCharacter::PickUp(AActor* otherActor)
+void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor)
 {
+	if (!otherActor) return;
 	if (Cast<APawn>(otherActor)) return;
 	TArray<UActorComponent*> components;
 	FVector pickUpLocation = GetMesh()->GetRightVector() * 200 + (GetMesh()->GetComponentLocation() + FVector(0.0, 0.0, 42.5));
@@ -92,8 +93,8 @@ void AMyCharacter::PickUp(AActor* otherActor)
 				if (otherActorMesh->IsSimulatingPhysics()) otherActorMesh->SetSimulatePhysics(false);
 				otherActorMesh->SetWorldLocationAndRotation(pickUpLocation, pickUpRotation);
 			}
-			else if (!otherActorMesh->IsSimulatingPhysics()) {
-				otherActorMesh->SetSimulatePhysics(true);
+			else {
+				if (!otherActorMesh->IsSimulatingPhysics()) otherActorMesh->SetSimulatePhysics(true);
 			}
 		}
 	}

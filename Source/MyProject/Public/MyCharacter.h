@@ -47,7 +47,7 @@ public:
 	void Dash(UCameraComponent* camera);
 
 	UFUNCTION(BlueprintCallable)
-	void PickUp(AActor* otherActor);
+	void PickUp(UPARAM(ref)AActor*& otherActor);
 
 	UFUNCTION(BlueprintCallable)
 	void Fly();

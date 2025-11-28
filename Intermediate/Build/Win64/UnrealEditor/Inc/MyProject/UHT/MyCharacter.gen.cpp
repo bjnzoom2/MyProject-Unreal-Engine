@@ -25,10 +25,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	DEFINE_FUNCTION(AMyCharacter::execPickUp)
 	{
-		P_GET_OBJECT(AActor,Z_Param_otherActor);
+		P_GET_OBJECT_REF(AActor,Z_Param_Out_otherActor);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->PickUp(Z_Param_otherActor);
+		P_THIS->PickUp(Z_Param_Out_otherActor);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execDash)
@@ -255,7 +255,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor = { "otherActor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventPickUp_Parms, otherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor = { "otherActor", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventPickUp_Parms, otherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor,
 	};
@@ -264,7 +264,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ "ModuleRelativePath", "Public/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "PickUp", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::MyCharacter_eventPickUp_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "PickUp", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::MyCharacter_eventPickUp_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams) };
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers) < 2048);
 	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::MyCharacter_eventPickUp_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_AMyCharacter_PickUp()
@@ -313,7 +313,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
-		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 2672232390
+		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 4217449720
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -387,9 +387,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2420238757U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2788730848U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_232367574(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1716686261(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
