@@ -81,6 +81,7 @@ void AMyCharacter::Dash(UCameraComponent* camera)
 
 void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline)
 {
+	if (!otherActor) return;
 	if (Cast<APawn>(otherActor)) return;
 	TArray<UActorComponent*> components;
 	FVector pickUpLocation = GetMesh()->GetRightVector() * 200 + (GetMesh()->GetComponentLocation() + FVector(0.0, 0.0, 42.5));
