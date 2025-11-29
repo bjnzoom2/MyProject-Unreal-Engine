@@ -12,6 +12,7 @@ AMyCharacter::AMyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	bCanDash = false;
 	bPickupState = false;
+	bPreviousPickupState = false;
 }
 
 // Called when the game starts or when spawned
@@ -78,9 +79,8 @@ void AMyCharacter::Dash(UCameraComponent* camera)
 	bCanDash = false;
 }
 
-void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor)
+void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline)
 {
-	if (!otherActor) return;
 	if (Cast<APawn>(otherActor)) return;
 	TArray<UActorComponent*> components;
 	FVector pickUpLocation = GetMesh()->GetRightVector() * 200 + (GetMesh()->GetComponentLocation() + FVector(0.0, 0.0, 42.5));
@@ -92,9 +92,18 @@ void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor)
 			if (bPickupState) {
 				if (otherActorMesh->IsSimulatingPhysics()) otherActorMesh->SetSimulatePhysics(false);
 				otherActorMesh->SetWorldLocationAndRotation(pickUpLocation, pickUpRotation);
+				bPreviousPickupState = true;
 			}
 			else {
 				if (!otherActorMesh->IsSimulatingPhysics()) otherActorMesh->SetSimulatePhysics(true);
+				if (bPreviousPickupState) {
+					otherActorMesh->SetOverlayMaterial(nullptr);
+					otherActor = nullptr;
+				}
+				else {
+					if (otherActorMesh->GetOverlayMaterial() != outline) otherActorMesh->SetOverlayMaterial(outline);
+				}
+				bPreviousPickupState = false;
 			}
 		}
 	}

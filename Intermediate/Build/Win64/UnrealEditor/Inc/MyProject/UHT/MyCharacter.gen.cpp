@@ -12,6 +12,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_MyProject();
@@ -26,9 +27,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	DEFINE_FUNCTION(AMyCharacter::execPickUp)
 	{
 		P_GET_OBJECT_REF(AActor,Z_Param_Out_otherActor);
+		P_GET_OBJECT(UMaterialInterface,Z_Param_outline);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->PickUp(Z_Param_Out_otherActor);
+		P_THIS->PickUp(Z_Param_Out_otherActor,Z_Param_outline);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execDash)
@@ -247,8 +249,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		struct MyCharacter_eventPickUp_Parms
 		{
 			AActor* otherActor;
+			UMaterialInterface* outline;
 		};
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_otherActor;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_outline;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -256,8 +260,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor = { "otherActor", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventPickUp_Parms, otherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_outline = { "outline", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventPickUp_Parms, outline), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_outline,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams[] = {
@@ -298,6 +304,11 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static void NewProp_bPickupState_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bPickupState;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bPreviousPickupState_MetaData[];
+#endif
+		static void NewProp_bPreviousPickupState_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bPreviousPickupState;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -313,7 +324,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
-		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 4217449720
+		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 2704484211
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -345,9 +356,21 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		((AMyCharacter*)Obj)->bPickupState = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState = { "bPickupState", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_MetaData[] = {
+		{ "Category", "MyCharacter" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_SetBit(void* Obj)
+	{
+		((AMyCharacter*)Obj)->bPreviousPickupState = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState = { "bPreviousPickupState", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMyCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMyCharacter>::IsAbstract,
@@ -387,9 +410,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2788730848U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1509189547U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1716686261(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1552820878(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

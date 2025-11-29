@@ -34,6 +34,9 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool bPickupState;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bPreviousPickupState;
+
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
 
@@ -47,7 +50,7 @@ public:
 	void Dash(UCameraComponent* camera);
 
 	UFUNCTION(BlueprintCallable)
-	void PickUp(UPARAM(ref)AActor*& otherActor);
+	void PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);
 
 	UFUNCTION(BlueprintCallable)
 	void Fly();
