@@ -123,14 +123,18 @@ void AMyCharacter::Fly()
 void AMyCharacter::Shoot(UCameraComponent* camera)
 {
 	FHitResult hit;
-	FVector startPos = GetCapsuleComponent()->GetComponentLocation();
+	FVector startPos = camera->GetComponentLocation();
 	FVector endPos = camera->GetForwardVector() * range + startPos;
 	FCollisionQueryParams queParams;
 	queParams.AddIgnoredActor(this);
 	bool bHit = GetWorld()->LineTraceSingleByChannel(hit, startPos, endPos, ECollisionChannel::ECC_Visibility, queParams);
 	DrawDebugLine(GetWorld(), startPos, bHit ? hit.Location : endPos, bHit ? FColor::Red : FColor::Green, true);
 	if (bHit) {
-		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_VectorToString(hit.GetComponent()->GetComponentLocation()));
+		FVector hitLocation = hit.Location;
+		if (Cast<UMeshComponent>(hit.GetComponent()) && hit.GetComponent()->IsSimulatingPhysics()) {
+			FVector componentLocation = hit.GetComponent()->GetComponentLocation();
+			hit.GetComponent()->AddImpulse((componentLocation - hitLocation).GetSafeNormal() * 100000);
+		}
 	}
 }
 
