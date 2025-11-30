@@ -120,3 +120,17 @@ void AMyCharacter::Fly()
 	}
 }
 
+void AMyCharacter::Shoot(UCameraComponent* camera)
+{
+	FHitResult hit;
+	FVector startPos = GetCapsuleComponent()->GetComponentLocation();
+	FVector endPos = camera->GetForwardVector() * range + startPos;
+	FCollisionQueryParams queParams;
+	queParams.AddIgnoredActor(this);
+	bool bHit = GetWorld()->LineTraceSingleByChannel(hit, startPos, endPos, ECollisionChannel::ECC_Visibility, queParams);
+	DrawDebugLine(GetWorld(), startPos, bHit ? hit.Location : endPos, bHit ? FColor::Red : FColor::Green, true);
+	if (bHit) {
+		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_VectorToString(hit.GetComponent()->GetComponentLocation()));
+	}
+}
+

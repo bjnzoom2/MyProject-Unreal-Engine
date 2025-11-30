@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -37,6 +38,9 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool bPreviousPickupState;
 
+	UPROPERTY(BlueprintReadWrite)
+	double range = 5000;
+
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
 
@@ -54,4 +58,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fly();
+
+	UFUNCTION(BlueprintCallable)
+	void Shoot(UCameraComponent* camera);
 };
