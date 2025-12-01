@@ -13,16 +13,16 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_MyProject();
 // End Cross Module References
 	DEFINE_FUNCTION(AMyCharacter::execShoot)
 	{
-		P_GET_OBJECT(UCameraComponent,Z_Param_camera);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->Shoot(Z_Param_camera);
+		P_THIS->Shoot();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execFly)
@@ -43,10 +43,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	DEFINE_FUNCTION(AMyCharacter::execDash)
 	{
-		P_GET_OBJECT(UCameraComponent,Z_Param_camera);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->Dash(Z_Param_camera);
+		P_THIS->Dash();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execMoveAlongUpVector)
@@ -89,37 +88,17 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	struct Z_Construct_UFunction_AMyCharacter_Dash_Statics
 	{
-		struct MyCharacter_eventDash_Parms
-		{
-			UCameraComponent* camera;
-		};
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_camera_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_camera;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_Dash_Statics::NewProp_camera_MetaData[] = {
-		{ "EditInline", "true" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_Dash_Statics::NewProp_camera = { "camera", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventDash_Parms, camera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Dash_Statics::NewProp_camera_MetaData), Z_Construct_UFunction_AMyCharacter_Dash_Statics::NewProp_camera_MetaData) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_Dash_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_Dash_Statics::NewProp_camera,
-	};
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_Dash_Statics::Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Public/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_Dash_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "Dash", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_Dash_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Dash_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_Dash_Statics::MyCharacter_eventDash_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Dash_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_Dash_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Dash_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_Dash_Statics::MyCharacter_eventDash_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_Dash_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "Dash", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Dash_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_Dash_Statics::Function_MetaDataParams) };
 	UFunction* Z_Construct_UFunction_AMyCharacter_Dash()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -293,37 +272,17 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	struct Z_Construct_UFunction_AMyCharacter_Shoot_Statics
 	{
-		struct MyCharacter_eventShoot_Parms
-		{
-			UCameraComponent* camera;
-		};
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_camera_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_camera;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_Shoot_Statics::NewProp_camera_MetaData[] = {
-		{ "EditInline", "true" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_Shoot_Statics::NewProp_camera = { "camera", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventShoot_Parms, camera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::NewProp_camera_MetaData), Z_Construct_UFunction_AMyCharacter_Shoot_Statics::NewProp_camera_MetaData) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_Shoot_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_Shoot_Statics::NewProp_camera,
-	};
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Public/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_Shoot_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "Shoot", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_Shoot_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::MyCharacter_eventShoot_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::MyCharacter_eventShoot_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_Shoot_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "Shoot", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams) };
 	UFunction* Z_Construct_UFunction_AMyCharacter_Shoot()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -345,6 +304,14 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_cameraComp_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPtrPropertyParams NewProp_cameraComp;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_springArmComp_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPtrPropertyParams NewProp_springArmComp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCanDash_MetaData[];
 #endif
@@ -374,13 +341,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AMyCharacter_Dash, "Dash" }, // 2164104286
+		{ &Z_Construct_UFunction_AMyCharacter_Dash, "Dash" }, // 1614259173
 		{ &Z_Construct_UFunction_AMyCharacter_Fly, "Fly" }, // 1606461507
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
 		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 2704484211
-		{ &Z_Construct_UFunction_AMyCharacter_Shoot, "Shoot" }, // 2880599423
+		{ &Z_Construct_UFunction_AMyCharacter_Shoot, "Shoot" }, // 3108240336
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -390,6 +357,22 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ "ModuleRelativePath", "Public/MyCharacter.h" },
 	};
 #endif
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp_MetaData[] = {
+		{ "Category", "C++ Components" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp = { "cameraComp", nullptr, (EPropertyFlags)0x001400000008000d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, cameraComp), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp_MetaData[] = {
+		{ "Category", "C++ Components" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp = { "springArmComp", nullptr, (EPropertyFlags)0x001400000008000d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, springArmComp), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash_MetaData[] = {
 		{ "Category", "MyCharacter" },
@@ -431,6 +414,8 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 	const UECodeGen_Private::FDoublePropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_range = { "range", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Double, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, range), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyCharacter_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState,
@@ -474,9 +459,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1460146026U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3996115499U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_3645713844(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2811696188(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

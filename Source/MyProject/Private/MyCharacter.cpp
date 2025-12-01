@@ -10,7 +10,7 @@ AMyCharacter::AMyCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	bCanDash = false;
+	bCanDash = true;
 	bPickupState = false;
 	bPreviousPickupState = false;
 }
@@ -61,14 +61,14 @@ void AMyCharacter::MoveAlongUpVector(float AxisValue)
 	}
 }
 
-void AMyCharacter::Dash(UCameraComponent* camera)
+void AMyCharacter::Dash()
 {
 	if (!GetMesh() || GetCharacterMovement()->IsFlying()) return;
 	bool grounded = !GetCharacterMovement()->IsFalling();
 	if (!grounded && !bCanDash) return;
 
-	if (camera) {
-		FVector dashVector = camera->GetForwardVector();
+	if (cameraComp) {
+		FVector dashVector = cameraComp->GetForwardVector();
 		FVector velocityVector = GetVelocity();
 		dashVector.X *= 4.8;
 		dashVector.Y *= 4.8;
@@ -120,11 +120,11 @@ void AMyCharacter::Fly()
 	}
 }
 
-void AMyCharacter::Shoot(UCameraComponent* camera)
+void AMyCharacter::Shoot()
 {
 	FHitResult hit;
-	FVector startPos = camera->GetComponentLocation();
-	FVector endPos = camera->GetForwardVector() * range + startPos;
+	FVector startPos = springArmComp->GetComponentLocation();
+	FVector endPos = cameraComp->GetForwardVector() * range + startPos;
 	FCollisionQueryParams queParams;
 	queParams.AddIgnoredActor(this);
 	bool bHit = GetWorld()->LineTraceSingleByChannel(hit, startPos, endPos, ECollisionChannel::ECC_Visibility, queParams);
@@ -133,7 +133,7 @@ void AMyCharacter::Shoot(UCameraComponent* camera)
 		FVector hitLocation = hit.Location;
 		if (Cast<UMeshComponent>(hit.GetComponent()) && hit.GetComponent()->IsSimulatingPhysics()) {
 			FVector componentLocation = hit.GetComponent()->GetComponentLocation();
-			hit.GetComponent()->AddImpulse((componentLocation - hitLocation).GetSafeNormal() * 100000);
+			hit.GetComponent()->AddImpulse((componentLocation - hitLocation).GetSafeNormal() * 2000, NAME_None, true);
 		}
 	}
 }

@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "MyCharacter.generated.h"
 
@@ -29,6 +30,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="C++ Components")
+	TObjectPtr<UCameraComponent> cameraComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Components")
+	TObjectPtr<USpringArmComponent> springArmComp;
+
 	UPROPERTY(BlueprintReadWrite)
 	bool bCanDash;
 
@@ -51,7 +58,7 @@ public:
 	void MoveAlongUpVector(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void Dash(UCameraComponent* camera);
+	void Dash();
 
 	UFUNCTION(BlueprintCallable)
 	void PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);
@@ -60,5 +67,5 @@ public:
 	void Fly();
 
 	UFUNCTION(BlueprintCallable)
-	void Shoot(UCameraComponent* camera);
+	void Shoot();
 };
