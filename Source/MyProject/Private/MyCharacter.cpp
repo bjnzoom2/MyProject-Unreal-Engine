@@ -125,10 +125,7 @@ void AMyCharacter::Shoot()
 	FHitResult hit;
 	FVector startPos = springArmComp->GetComponentLocation();
 	FVector endPos = cameraComp->GetForwardVector() * range + startPos;
-	FCollisionQueryParams queParams;
-	queParams.AddIgnoredActor(this);
-	bool bHit = GetWorld()->LineTraceSingleByChannel(hit, startPos, endPos, ECollisionChannel::ECC_Visibility, queParams);
-	DrawDebugLine(GetWorld(), startPos, bHit ? hit.Location : endPos, bHit ? FColor::Red : FColor::Green, true);
+	bool bHit = UKismetSystemLibrary::SphereTraceSingle(GetWorld(), startPos, endPos, 20.0f, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hit, true);
 	if (bHit) {
 		FVector hitLocation = hit.Location;
 		if (Cast<UMeshComponent>(hit.GetComponent()) && hit.GetComponent()->IsSimulatingPhysics()) {
