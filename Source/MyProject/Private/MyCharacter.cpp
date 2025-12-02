@@ -122,15 +122,19 @@ void AMyCharacter::Fly()
 
 void AMyCharacter::Shoot()
 {
-	FHitResult hit;
+	TArray<FHitResult> hits;
 	FVector startPos = springArmComp->GetComponentLocation();
 	FVector endPos = cameraComp->GetForwardVector() * range + startPos;
-	bool bHit = UKismetSystemLibrary::SphereTraceSingle(GetWorld(), startPos, endPos, 20.0f, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hit, true);
+	bool bHit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), startPos, endPos, 20.0f, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hits, true);
 	if (bHit) {
-		FVector hitLocation = hit.Location;
-		if (Cast<UMeshComponent>(hit.GetComponent()) && hit.GetComponent()->IsSimulatingPhysics()) {
-			FVector componentLocation = hit.GetComponent()->GetComponentLocation();
-			hit.GetComponent()->AddImpulse((componentLocation - hitLocation).GetSafeNormal() * 2000, NAME_None, true);
+		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_IntToString(hits.Num()));
+		for (FHitResult& hit : hits) {
+			UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_NameToString(hit.GetActor()->GetFName()));
+			if (hit.GetComponent()->IsSimulatingPhysics()) {
+				FVector hitLocation = hit.Location;
+				FVector componentLocation = hit.GetComponent()->GetComponentLocation();
+				hit.GetComponent()->AddImpulse((componentLocation - hitLocation).GetSafeNormal() * 2000, NAME_None, true);
+			}
 		}
 	}
 }
