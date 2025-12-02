@@ -125,7 +125,7 @@ void AMyCharacter::Shoot()
 	TArray<FHitResult> hits;
 	FVector startPos = springArmComp->GetComponentLocation();
 	FVector endPos = cameraComp->GetForwardVector() * range + startPos;
-	bool bHit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), startPos, endPos, 20.0f, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hits, true);
+	bool bHit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), startPos, endPos, 30.0f, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hits, true);
 	if (bHit) {
 		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_IntToString(hits.Num()));
 		for (FHitResult& hit : hits) {
