@@ -13,6 +13,8 @@ AMyCharacter::AMyCharacter()
 	bCanDash = true;
 	bPickupState = false;
 	bPreviousPickupState = false;
+	bSolverActivated = false;
+	solverMode = ESolverMode::Transform;
 }
 
 // Called when the game starts or when spawned
@@ -137,5 +139,27 @@ void AMyCharacter::Shoot()
 			}
 		}
 	}
+}
+
+void AMyCharacter::ActivateSolver()
+{
+	bSolverActivated = !bSolverActivated;
+	if (bSolverActivated) {
+		int solverModeValue = static_cast<int>(solverMode);
+		solverMeshComp->SetStaticMesh(solverMeshes[solverModeValue]);
+	}
+	else {
+		solverMeshComp->SetStaticMesh(nullptr);
+	}
+}
+
+void AMyCharacter::SwitchSolverMode(float mouseAxisValue)
+{
+	int solverModeValue = static_cast<int>(solverMode);
+	solverModeValue += static_cast<int>(mouseAxisValue);
+	if (solverModeValue > 3) solverModeValue = 0;
+	if (solverModeValue < 0) solverModeValue = 3;
+	if (bSolverActivated) solverMeshComp->SetStaticMesh(solverMeshes[solverModeValue]);
+	solverMode = static_cast<ESolverMode>(solverModeValue);
 }
 

@@ -8,7 +8,18 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
+#include "NiagaraSystem.h"
 #include "MyCharacter.generated.h"
+
+UENUM()
+enum ESolverMode {
+	Transform = 0,
+	Rotate = 1,
+	Scale = 2,
+	Edit = 3
+};
 
 UCLASS()
 class MYPROJECT_API AMyCharacter : public ACharacter
@@ -48,6 +59,18 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	double range = 5000;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bSolverActivated;
+
+	UPROPERTY(BlueprintReadWrite)
+	TEnumAsByte<ESolverMode> solverMode;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Components")
+	TObjectPtr<UStaticMeshComponent> solverMeshComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Meshes")
+	TArray<TObjectPtr<UStaticMesh>> solverMeshes;
+
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
 
@@ -68,4 +91,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Shoot();
+
+	UFUNCTION(BlueprintCallable)
+	void ActivateSolver();
+
+	UFUNCTION(BlueprintCallable)
+	void SwitchSolverMode(float mouseAxisValue);
 };

@@ -14,10 +14,84 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UStaticMesh_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter_NoRegister();
+	MYPROJECT_API UEnum* Z_Construct_UEnum_MyProject_ESolverMode();
 	UPackage* Z_Construct_UPackage__Script_MyProject();
 // End Cross Module References
+	static FEnumRegistrationInfo Z_Registration_Info_UEnum_ESolverMode;
+	static UEnum* ESolverMode_StaticEnum()
+	{
+		if (!Z_Registration_Info_UEnum_ESolverMode.OuterSingleton)
+		{
+			Z_Registration_Info_UEnum_ESolverMode.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_MyProject_ESolverMode, (UObject*)Z_Construct_UPackage__Script_MyProject(), TEXT("ESolverMode"));
+		}
+		return Z_Registration_Info_UEnum_ESolverMode.OuterSingleton;
+	}
+	template<> MYPROJECT_API UEnum* StaticEnum<ESolverMode>()
+	{
+		return ESolverMode_StaticEnum();
+	}
+	struct Z_Construct_UEnum_MyProject_ESolverMode_Statics
+	{
+		static const UECodeGen_Private::FEnumeratorParam Enumerators[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FEnumParams EnumParams;
+	};
+	const UECodeGen_Private::FEnumeratorParam Z_Construct_UEnum_MyProject_ESolverMode_Statics::Enumerators[] = {
+		{ "Transform", (int64)Transform },
+		{ "Rotate", (int64)Rotate },
+		{ "Scale", (int64)Scale },
+		{ "Edit", (int64)Edit },
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_MyProject_ESolverMode_Statics::Enum_MetaDataParams[] = {
+		{ "Edit.Name", "Edit" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+		{ "Rotate.Name", "Rotate" },
+		{ "Scale.Name", "Scale" },
+		{ "Transform.Name", "Transform" },
+	};
+#endif
+	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_MyProject_ESolverMode_Statics::EnumParams = {
+		(UObject*(*)())Z_Construct_UPackage__Script_MyProject,
+		nullptr,
+		"ESolverMode",
+		"ESolverMode",
+		Z_Construct_UEnum_MyProject_ESolverMode_Statics::Enumerators,
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_MyProject_ESolverMode_Statics::Enumerators),
+		EEnumFlags::None,
+		(uint8)UEnum::ECppForm::Regular,
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_MyProject_ESolverMode_Statics::Enum_MetaDataParams), Z_Construct_UEnum_MyProject_ESolverMode_Statics::Enum_MetaDataParams)
+	};
+	UEnum* Z_Construct_UEnum_MyProject_ESolverMode()
+	{
+		if (!Z_Registration_Info_UEnum_ESolverMode.InnerSingleton)
+		{
+			UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_ESolverMode.InnerSingleton, Z_Construct_UEnum_MyProject_ESolverMode_Statics::EnumParams);
+		}
+		return Z_Registration_Info_UEnum_ESolverMode.InnerSingleton;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execSwitchSolverMode)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_mouseAxisValue);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SwitchSolverMode(Z_Param_mouseAxisValue);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execActivateSolver)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ActivateSolver();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execShoot)
 	{
 		P_FINISH;
@@ -76,6 +150,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	{
 		UClass* Class = AMyCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ActivateSolver", &AMyCharacter::execActivateSolver },
 			{ "Dash", &AMyCharacter::execDash },
 			{ "Fly", &AMyCharacter::execFly },
 			{ "MoveAlongForwardVector", &AMyCharacter::execMoveAlongForwardVector },
@@ -83,8 +158,31 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "MoveAlongUpVector", &AMyCharacter::execMoveAlongUpVector },
 			{ "PickUp", &AMyCharacter::execPickUp },
 			{ "Shoot", &AMyCharacter::execShoot },
+			{ "SwitchSolverMode", &AMyCharacter::execSwitchSolverMode },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AMyCharacter_ActivateSolver_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_ActivateSolver_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_ActivateSolver_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "ActivateSolver", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ActivateSolver_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_ActivateSolver_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_ActivateSolver()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_ActivateSolver_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AMyCharacter_Dash_Statics
 	{
@@ -292,6 +390,40 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics
+	{
+		struct MyCharacter_eventSwitchSolverMode_Parms
+		{
+			float mouseAxisValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_mouseAxisValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::NewProp_mouseAxisValue = { "mouseAxisValue", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventSwitchSolverMode_Parms, mouseAxisValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::NewProp_mouseAxisValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "SwitchSolverMode", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::MyCharacter_eventSwitchSolverMode_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::MyCharacter_eventSwitchSolverMode_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AMyCharacter_SwitchSolverMode()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_SwitchSolverMode_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(AMyCharacter);
 	UClass* Z_Construct_UClass_AMyCharacter_NoRegister()
 	{
@@ -331,6 +463,24 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_range_MetaData[];
 #endif
 		static const UECodeGen_Private::FDoublePropertyParams NewProp_range;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bSolverActivated_MetaData[];
+#endif
+		static void NewProp_bSolverActivated_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bSolverActivated;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_solverMode_MetaData[];
+#endif
+		static const UECodeGen_Private::FBytePropertyParams NewProp_solverMode;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_solverMeshComp_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPtrPropertyParams NewProp_solverMeshComp;
+		static const UECodeGen_Private::FObjectPtrPropertyParams NewProp_solverMeshes_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_solverMeshes_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_solverMeshes;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -341,6 +491,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AMyCharacter_ActivateSolver, "ActivateSolver" }, // 1683464538
 		{ &Z_Construct_UFunction_AMyCharacter_Dash, "Dash" }, // 1614259173
 		{ &Z_Construct_UFunction_AMyCharacter_Fly, "Fly" }, // 1606461507
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
@@ -348,6 +499,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
 		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 2704484211
 		{ &Z_Construct_UFunction_AMyCharacter_Shoot, "Shoot" }, // 3108240336
+		{ &Z_Construct_UFunction_AMyCharacter_SwitchSolverMode, "SwitchSolverMode" }, // 3632513572
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -413,6 +565,40 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FDoublePropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_range = { "range", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Double, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, range), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated_MetaData[] = {
+		{ "Category", "MyCharacter" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated_SetBit(void* Obj)
+	{
+		((AMyCharacter*)Obj)->bSolverActivated = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated = { "bSolverActivated", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMode_MetaData[] = {
+		{ "Category", "MyCharacter" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMode = { "solverMode", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, solverMode), Z_Construct_UEnum_MyProject_ESolverMode, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMode_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMode_MetaData) }; // 1658299279
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshComp_MetaData[] = {
+		{ "Category", "C++ Components" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshComp = { "solverMeshComp", nullptr, (EPropertyFlags)0x001400000008000d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, solverMeshComp), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshComp_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshComp_MetaData) };
+	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes_Inner = { "solverMeshes", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(0, nullptr) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes_MetaData[] = {
+		{ "Category", "C++ Meshes" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes = { "solverMeshes", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, solverMeshes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp,
@@ -420,6 +606,11 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_range,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMode,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshComp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_solverMeshes,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMyCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMyCharacter>::IsAbstract,
@@ -456,13 +647,17 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	AMyCharacter::~AMyCharacter() {}
 	struct Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics
 	{
+		static const FEnumRegisterCompiledInInfo EnumInfo[];
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3996115499U) },
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo[] = {
+		{ ESolverMode_StaticEnum, TEXT("ESolverMode"), &Z_Registration_Info_UEnum_ESolverMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1658299279U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2811696188(TEXT("/Script/MyProject"),
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3697083866U) },
+	};
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2626022972(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
-		nullptr, 0);
+		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
