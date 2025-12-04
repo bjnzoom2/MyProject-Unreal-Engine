@@ -77,6 +77,15 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return Z_Registration_Info_UEnum_ESolverMode.InnerSingleton;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execSolverTransform)
+	{
+		P_GET_OBJECT_REF(AActor,Z_Param_Out_otherActor);
+		P_GET_OBJECT(UMaterialInterface,Z_Param_outline);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SolverTransform(Z_Param_Out_otherActor,Z_Param_outline);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execSwitchSolverMode)
 	{
 		P_GET_PROPERTY(FFloatProperty,Z_Param_mouseAxisValue);
@@ -104,15 +113,6 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->Fly();
-		P_NATIVE_END;
-	}
-	DEFINE_FUNCTION(AMyCharacter::execPickUp)
-	{
-		P_GET_OBJECT_REF(AActor,Z_Param_Out_otherActor);
-		P_GET_OBJECT(UMaterialInterface,Z_Param_outline);
-		P_FINISH;
-		P_NATIVE_BEGIN;
-		P_THIS->PickUp(Z_Param_Out_otherActor,Z_Param_outline);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execDash)
@@ -156,8 +156,8 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "MoveAlongForwardVector", &AMyCharacter::execMoveAlongForwardVector },
 			{ "MoveAlongRightVector", &AMyCharacter::execMoveAlongRightVector },
 			{ "MoveAlongUpVector", &AMyCharacter::execMoveAlongUpVector },
-			{ "PickUp", &AMyCharacter::execPickUp },
 			{ "Shoot", &AMyCharacter::execShoot },
+			{ "SolverTransform", &AMyCharacter::execSolverTransform },
 			{ "SwitchSolverMode", &AMyCharacter::execSwitchSolverMode },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -215,7 +215,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_Fly_Statics::Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//UFUNCTION(BlueprintCallable)\n//void PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);\n" },
+#endif
 		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "UFUNCTION(BlueprintCallable)\nvoid PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_Fly_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "Fly", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Fly_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_Fly_Statics::Function_MetaDataParams) };
@@ -330,44 +336,6 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_AMyCharacter_PickUp_Statics
-	{
-		struct MyCharacter_eventPickUp_Parms
-		{
-			AActor* otherActor;
-			UMaterialInterface* outline;
-		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_otherActor;
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_outline;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor = { "otherActor", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventPickUp_Parms, otherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_outline = { "outline", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventPickUp_Parms, outline), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_otherActor,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_PickUp_Statics::NewProp_outline,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/MyCharacter.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_PickUp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "PickUp", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::MyCharacter_eventPickUp_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_PickUp_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_PickUp_Statics::MyCharacter_eventPickUp_Parms) < MAX_uint16);
-	UFunction* Z_Construct_UFunction_AMyCharacter_PickUp()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_PickUp_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
 	struct Z_Construct_UFunction_AMyCharacter_Shoot_Statics
 	{
 #if WITH_METADATA
@@ -387,6 +355,44 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_Shoot_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics
+	{
+		struct MyCharacter_eventSolverTransform_Parms
+		{
+			AActor* otherActor;
+			UMaterialInterface* outline;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_otherActor;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_outline;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::NewProp_otherActor = { "otherActor", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventSolverTransform_Parms, otherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::NewProp_outline = { "outline", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventSolverTransform_Parms, outline), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::NewProp_otherActor,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::NewProp_outline,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "SolverTransform", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::MyCharacter_eventSolverTransform_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::MyCharacter_eventSolverTransform_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AMyCharacter_SolverTransform()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_SolverTransform_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -493,12 +499,12 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMyCharacter_ActivateSolver, "ActivateSolver" }, // 1683464538
 		{ &Z_Construct_UFunction_AMyCharacter_Dash, "Dash" }, // 1614259173
-		{ &Z_Construct_UFunction_AMyCharacter_Fly, "Fly" }, // 1606461507
+		{ &Z_Construct_UFunction_AMyCharacter_Fly, "Fly" }, // 2485847123
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
-		{ &Z_Construct_UFunction_AMyCharacter_PickUp, "PickUp" }, // 2704484211
 		{ &Z_Construct_UFunction_AMyCharacter_Shoot, "Shoot" }, // 3108240336
+		{ &Z_Construct_UFunction_AMyCharacter_SolverTransform, "SolverTransform" }, // 113788535
 		{ &Z_Construct_UFunction_AMyCharacter_SwitchSolverMode, "SwitchSolverMode" }, // 3632513572
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::FuncInfo) < 2048);
@@ -654,9 +660,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ ESolverMode_StaticEnum, TEXT("ESolverMode"), &Z_Registration_Info_UEnum_ESolverMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1658299279U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3697083866U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1770297042U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2626022972(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2433009414(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo));

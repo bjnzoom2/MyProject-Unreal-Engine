@@ -83,8 +83,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Dash();
 
-	UFUNCTION(BlueprintCallable)
-	void PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);
+	//UFUNCTION(BlueprintCallable)
+	//void PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);
 
 	UFUNCTION(BlueprintCallable)
 	void Fly();
@@ -97,4 +97,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SwitchSolverMode(float mouseAxisValue);
+
+	UFUNCTION(BlueprintCallable)
+	void SolverTransform(UPARAM(ref)AActor* otherActor, UMaterialInterface* outline);
 };

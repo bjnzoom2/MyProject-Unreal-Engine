@@ -21,11 +21,11 @@ class UMaterialInterface;
 #define FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_27_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execSolverTransform); \
 	DECLARE_FUNCTION(execSwitchSolverMode); \
 	DECLARE_FUNCTION(execActivateSolver); \
 	DECLARE_FUNCTION(execShoot); \
 	DECLARE_FUNCTION(execFly); \
-	DECLARE_FUNCTION(execPickUp); \
 	DECLARE_FUNCTION(execDash); \
 	DECLARE_FUNCTION(execMoveAlongUpVector); \
 	DECLARE_FUNCTION(execMoveAlongRightVector); \

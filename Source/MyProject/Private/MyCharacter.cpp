@@ -81,7 +81,7 @@ void AMyCharacter::Dash()
 	bCanDash = false;
 }
 
-void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline)
+/*void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline)
 {
 	if (!otherActor) return;
 	if (Cast<APawn>(otherActor)) return;
@@ -110,7 +110,7 @@ void AMyCharacter::PickUp(UPARAM(ref)AActor*& otherActor, UMaterialInterface* ou
 			}
 		}
 	}
-}
+}*/
 
 void AMyCharacter::Fly()
 {
@@ -161,5 +161,45 @@ void AMyCharacter::SwitchSolverMode(float mouseAxisValue)
 	if (solverModeValue < 0) solverModeValue = 3;
 	if (bSolverActivated) solverMeshComp->SetStaticMesh(solverMeshes[solverModeValue]);
 	solverMode = static_cast<ESolverMode>(solverModeValue);
+}
+
+void AMyCharacter::SolverTransform(UPARAM(ref)AActor* otherActor, UMaterialInterface* outline)
+{
+	if (!bSolverActivated || !otherActor || Cast<APawn>(otherActor)) return;
+	TArray<UStaticMeshComponent*> otherActorMeshs;
+	otherActor->GetComponents(otherActorMeshs);
+	UStaticMeshComponent* otherMainMesh = nullptr;
+	UStaticMeshComponent* otherSolverMesh = nullptr;
+
+	for (UStaticMeshComponent* mesh : otherActorMeshs) {
+		if (mesh->GetFName() == FName("Solver Mesh")) {
+			otherSolverMesh = mesh;
+		}
+		else {
+			otherMainMesh = mesh;
+		}
+	}
+
+	if (!otherSolverMesh) {
+		otherSolverMesh = NewObject<UStaticMeshComponent>(otherActor, "Solver Mesh");
+		otherSolverMesh->SetMobility(EComponentMobility::Movable);
+		otherSolverMesh->SetStaticMesh(solverMeshes[0]);
+		otherSolverMesh->SetupAttachment(otherMainMesh);
+		otherSolverMesh->SetWorldLocation(otherMainMesh->GetComponentLocation() + FVector(0.0, 0.0, otherSolverMesh->GetStaticMesh()->GetBounds().BoxExtent.Size() / 2));
+		otherSolverMesh->SetWorldScale3D(FVector(2.0));
+		otherSolverMesh->RegisterComponent();
+		otherMainMesh->SetOverlayMaterial(outline);
+	}
+	else if (otherSolverMesh->GetStaticMesh() != solverMeshes[0]) {
+		otherSolverMesh->SetStaticMesh(solverMeshes[0]);
+		if (otherMainMesh->GetOverlayMaterial() != outline) otherMainMesh->SetOverlayMaterial(outline);
+	}
+	else {
+		otherSolverMesh->DestroyComponent();
+		otherSolverMesh = nullptr;
+		otherMainMesh->SetOverlayMaterial(nullptr);
+		otherMainMesh = nullptr;
+		otherActor = nullptr;
+	}
 }
 
