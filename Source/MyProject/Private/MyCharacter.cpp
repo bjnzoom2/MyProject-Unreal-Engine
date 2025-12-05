@@ -163,7 +163,7 @@ void AMyCharacter::SwitchSolverMode(float mouseAxisValue)
 	solverMode = static_cast<ESolverMode>(solverModeValue);
 }
 
-void AMyCharacter::SolverTransform(UPARAM(ref)AActor* otherActor, UMaterialInterface* outline)
+void AMyCharacter::SolverTransform(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline)
 {
 	if (!bSolverActivated || !otherActor || Cast<APawn>(otherActor)) return;
 	TArray<UStaticMeshComponent*> otherActorMeshs;
@@ -172,23 +172,23 @@ void AMyCharacter::SolverTransform(UPARAM(ref)AActor* otherActor, UMaterialInter
 	UStaticMeshComponent* otherSolverMesh = nullptr;
 
 	for (UStaticMeshComponent* mesh : otherActorMeshs) {
-		if (mesh->GetFName() == FName("Solver Mesh")) {
+		if (mesh->GetFName() == FName("SolverMesh")) {
 			otherSolverMesh = mesh;
 		}
-		else {
+		else if (mesh->GetFName() == FName("StaticMesh")) {
 			otherMainMesh = mesh;
 		}
 	}
 
 	if (!otherSolverMesh) {
-		otherSolverMesh = NewObject<UStaticMeshComponent>(otherActor, "Solver Mesh");
+		otherSolverMesh = NewObject<UStaticMeshComponent>(otherActor, "SolverMesh");
 		otherSolverMesh->SetMobility(EComponentMobility::Movable);
 		otherSolverMesh->SetStaticMesh(solverMeshes[0]);
 		otherSolverMesh->SetupAttachment(otherMainMesh);
-		otherSolverMesh->SetWorldLocation(otherMainMesh->GetComponentLocation() + FVector(0.0, 0.0, otherSolverMesh->GetStaticMesh()->GetBounds().BoxExtent.Size() / 2));
+		otherSolverMesh->SetWorldLocation(otherMainMesh->GetComponentLocation() + otherMainMesh->GetStaticMesh()->GetBounds().Origin);
 		otherSolverMesh->SetWorldScale3D(FVector(2.0));
-		otherSolverMesh->RegisterComponent();
 		otherMainMesh->SetOverlayMaterial(outline);
+		otherSolverMesh->RegisterComponent();
 	}
 	else if (otherSolverMesh->GetStaticMesh() != solverMeshes[0]) {
 		otherSolverMesh->SetStaticMesh(solverMeshes[0]);

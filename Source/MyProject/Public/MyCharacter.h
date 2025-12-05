@@ -8,9 +8,6 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "NiagaraFunctionLibrary.h"
-#include "NiagaraComponent.h"
-#include "NiagaraSystem.h"
 #include "MyCharacter.generated.h"
 
 UENUM()
@@ -99,5 +96,5 @@ public:
 	void SwitchSolverMode(float mouseAxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void SolverTransform(UPARAM(ref)AActor* otherActor, UMaterialInterface* outline);
+	void SolverTransform(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);
 };
