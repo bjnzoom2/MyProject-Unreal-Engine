@@ -14,7 +14,10 @@ AMyCharacter::AMyCharacter()
 	bPickupState = false;
 	bPreviousPickupState = false;
 	bSolverActivated = false;
+	bSolverUse = false;
 	solverMode = ESolverMode::Transform;
+	solverUseMode = ESolverMode::None;
+	otherActor = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -163,13 +166,11 @@ void AMyCharacter::SwitchSolverMode(float mouseAxisValue)
 	solverMode = static_cast<ESolverMode>(solverModeValue);
 }
 
-void AMyCharacter::SolverTransform(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline)
+void AMyCharacter::MeshCheck()
 {
-	if (!bSolverActivated || !otherActor || Cast<APawn>(otherActor)) return;
+	if (!otherActor || Cast<APawn>(otherActor)) return;
 	TArray<UStaticMeshComponent*> otherActorMeshs;
 	otherActor->GetComponents(otherActorMeshs);
-	UStaticMeshComponent* otherMainMesh = nullptr;
-	UStaticMeshComponent* otherSolverMesh = nullptr;
 
 	for (UStaticMeshComponent* mesh : otherActorMeshs) {
 		if (mesh->GetFName() == FName("SolverMesh")) {
@@ -179,19 +180,26 @@ void AMyCharacter::SolverTransform(UPARAM(ref)AActor*& otherActor, UMaterialInte
 			otherMainMesh = mesh;
 		}
 	}
+}
+
+void AMyCharacter::SolverUseMesh(UMaterialInterface* outline)
+{
+	if (!bSolverActivated || !otherActor || Cast<APawn>(otherActor)) return;
+	MeshCheck();
 
 	if (!otherSolverMesh) {
 		otherSolverMesh = NewObject<UStaticMeshComponent>(otherActor, "SolverMesh");
 		otherSolverMesh->SetMobility(EComponentMobility::Movable);
-		otherSolverMesh->SetStaticMesh(solverMeshes[0]);
+		otherSolverMesh->SetStaticMesh(solverMeshes[static_cast<int>(solverMode)]);
 		otherSolverMesh->SetupAttachment(otherMainMesh);
 		otherSolverMesh->SetWorldLocation(otherMainMesh->GetComponentLocation() + otherMainMesh->GetStaticMesh()->GetBounds().Origin);
 		otherSolverMesh->SetWorldScale3D(FVector(2.0));
-		otherMainMesh->SetOverlayMaterial(outline);
 		otherSolverMesh->RegisterComponent();
+		bSolverUse = true;
+		solverUseMode = solverMode;
 	}
-	else if (otherSolverMesh->GetStaticMesh() != solverMeshes[0]) {
-		otherSolverMesh->SetStaticMesh(solverMeshes[0]);
+	else if (otherSolverMesh->GetStaticMesh() != solverMeshes[static_cast<int>(solverMode)]) {
+		otherSolverMesh->SetStaticMesh(solverMeshes[static_cast<int>(solverMode)]);
 		if (otherMainMesh->GetOverlayMaterial() != outline) otherMainMesh->SetOverlayMaterial(outline);
 	}
 	else {
@@ -200,6 +208,26 @@ void AMyCharacter::SolverTransform(UPARAM(ref)AActor*& otherActor, UMaterialInte
 		otherMainMesh->SetOverlayMaterial(nullptr);
 		otherMainMesh = nullptr;
 		otherActor = nullptr;
+		bSolverUse = false;
+	}
+}
+
+void AMyCharacter::SolverUse()
+{
+	if (!bSolverActivated || !otherActor) return;
+	FVector transformVector = cameraComp->GetForwardVector() * 300 + GetMesh()->GetComponentLocation();
+	if (bSolverUse) {
+		switch (solverUseMode) {
+			case 0:
+				if (otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(false);
+				otherMainMesh->SetWorldLocation(transformVector);
+				break;
+			default:
+				return;
+		}
+	}
+	else {
+		if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
 	}
 }
 

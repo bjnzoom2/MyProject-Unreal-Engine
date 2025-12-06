@@ -15,7 +15,8 @@ enum ESolverMode {
 	Transform = 0,
 	Rotate = 1,
 	Scale = 2,
-	Edit = 3
+	Edit = 3,
+	None = 4
 };
 
 UCLASS()
@@ -60,13 +61,28 @@ public:
 	bool bSolverActivated;
 
 	UPROPERTY(BlueprintReadWrite)
+	bool bSolverUse;
+
+	UPROPERTY(BlueprintReadWrite)
 	TEnumAsByte<ESolverMode> solverMode;
+
+	UPROPERTY(BlueprintReadWrite)
+	TEnumAsByte<ESolverMode> solverUseMode;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Components")
 	TObjectPtr<UStaticMeshComponent> solverMeshComp;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Meshes")
 	TArray<TObjectPtr<UStaticMesh>> solverMeshes;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Actors")
+	TObjectPtr<AActor> otherActor;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TObjectPtr<UStaticMeshComponent> otherMainMesh;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TObjectPtr<UStaticMeshComponent> otherSolverMesh;
 
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
@@ -96,5 +112,11 @@ public:
 	void SwitchSolverMode(float mouseAxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void SolverTransform(UPARAM(ref)AActor*& otherActor, UMaterialInterface* outline);
+	void MeshCheck();
+
+	UFUNCTION(BlueprintCallable)
+	void SolverUseMesh(UMaterialInterface* outline);
+
+	UFUNCTION(BlueprintCallable)
+	void SolverUse();
 };
