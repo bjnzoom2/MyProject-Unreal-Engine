@@ -9,6 +9,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 // Cross Module References
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
@@ -513,16 +514,6 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static void NewProp_bCanDash_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanDash;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_bPickupState_MetaData[];
-#endif
-		static void NewProp_bPickupState_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_bPickupState;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_bPreviousPickupState_MetaData[];
-#endif
-		static void NewProp_bPreviousPickupState_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_bPreviousPickupState;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_range_MetaData[];
 #endif
 		static const UECodeGen_Private::FDoublePropertyParams NewProp_range;
@@ -565,6 +556,15 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_otherSolverMesh_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPtrPropertyParams NewProp_otherSolverMesh;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsLocked_MetaData[];
+#endif
+		static void NewProp_bIsLocked_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsLocked;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_mouseXY_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_mouseXY;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -623,31 +623,15 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash = { "bCanDash", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_MetaData[] = {
-		{ "Category", "MyCharacter" },
-		{ "ModuleRelativePath", "Public/MyCharacter.h" },
-	};
-#endif
-	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_SetBit(void* Obj)
-	{
-		((AMyCharacter*)Obj)->bPickupState = 1;
-	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState = { "bPickupState", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_MetaData[] = {
-		{ "Category", "MyCharacter" },
-		{ "ModuleRelativePath", "Public/MyCharacter.h" },
-	};
-#endif
-	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_SetBit(void* Obj)
-	{
-		((AMyCharacter*)Obj)->bPreviousPickupState = 1;
-	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState = { "bPreviousPickupState", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData[] = {
 		{ "Category", "MyCharacter" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//UPROPERTY(BlueprintReadWrite)\n//bool bPreviousPickupState;\n" },
+#endif
 		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "UPROPERTY(BlueprintReadWrite)\nbool bPreviousPickupState;" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FDoublePropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_range = { "range", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Double, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, range), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_range_MetaData) };
@@ -726,12 +710,28 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_otherSolverMesh = { "otherSolverMesh", nullptr, (EPropertyFlags)0x001400000008000d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, otherSolverMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_otherSolverMesh_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_otherSolverMesh_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked_MetaData[] = {
+		{ "Category", "MyCharacter" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked_SetBit(void* Obj)
+	{
+		((AMyCharacter*)Obj)->bIsLocked = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked = { "bIsLocked", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_mouseXY_MetaData[] = {
+		{ "Category", "MyCharacter" },
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_mouseXY = { "mouseXY", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, mouseXY), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_mouseXY_MetaData), Z_Construct_UClass_AMyCharacter_Statics::NewProp_mouseXY_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_cameraComp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_springArmComp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bCanDash,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPickupState,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPreviousPickupState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_range,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverActivated,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSolverUse,
@@ -743,6 +743,8 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_otherActor,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_otherMainMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_otherSolverMesh,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bIsLocked,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_mouseXY,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMyCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMyCharacter>::IsAbstract,
@@ -786,9 +788,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ ESolverMode_StaticEnum, TEXT("ESolverMode"), &Z_Registration_Info_UEnum_ESolverMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2294366891U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3269746513U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 359018569U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_4201300919(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1170093673(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo));

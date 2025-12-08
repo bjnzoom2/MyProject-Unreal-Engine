@@ -11,13 +11,14 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	bCanDash = true;
-	bPickupState = false;
-	bPreviousPickupState = false;
+	//bPickupState = false;
+	//bPreviousPickupState = false;
 	bSolverActivated = false;
 	bSolverUse = false;
 	solverMode = ESolverMode::Transform;
 	solverUseMode = ESolverMode::None;
 	otherActor = nullptr;
+	bIsLocked = false;
 }
 
 // Called when the game starts or when spawned
@@ -153,6 +154,13 @@ void AMyCharacter::ActivateSolver()
 	}
 	else {
 		solverMeshComp->SetStaticMesh(nullptr);
+		otherSolverMesh->DestroyComponent();
+		otherSolverMesh = nullptr;
+		otherMainMesh->SetOverlayMaterial(nullptr);
+		if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
+		otherMainMesh = nullptr;
+		otherActor = nullptr;
+		bSolverUse = false;
 	}
 }
 
@@ -192,11 +200,10 @@ void AMyCharacter::SolverUseMesh(UMaterialInterface* outline)
 		otherSolverMesh->SetMobility(EComponentMobility::Movable);
 		otherSolverMesh->SetStaticMesh(solverMeshes[static_cast<int>(solverMode)]);
 		otherSolverMesh->SetupAttachment(otherMainMesh);
-		otherSolverMesh->SetWorldLocation(otherMainMesh->GetComponentLocation() + otherMainMesh->GetStaticMesh()->GetBounds().Origin);
+		// otherSolverMesh->SetWorldLocation(otherMainMesh->GetComponentLocation() + otherMainMesh->GetStaticMesh()->GetBounds().Origin);
 		otherSolverMesh->SetWorldScale3D(FVector(2.0));
 		otherSolverMesh->RegisterComponent();
 		bSolverUse = true;
-		solverUseMode = solverMode;
 	}
 	else if (otherSolverMesh->GetStaticMesh() != solverMeshes[static_cast<int>(solverMode)]) {
 		otherSolverMesh->SetStaticMesh(solverMeshes[static_cast<int>(solverMode)]);
@@ -206,28 +213,31 @@ void AMyCharacter::SolverUseMesh(UMaterialInterface* outline)
 		otherSolverMesh->DestroyComponent();
 		otherSolverMesh = nullptr;
 		otherMainMesh->SetOverlayMaterial(nullptr);
+		if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
 		otherMainMesh = nullptr;
 		otherActor = nullptr;
 		bSolverUse = false;
 	}
+	solverUseMode = solverMode;
 }
 
 void AMyCharacter::SolverUse()
 {
 	if (!bSolverActivated || !otherActor) return;
-	FVector transformVector = cameraComp->GetForwardVector() * 300 + GetMesh()->GetComponentLocation();
 	if (bSolverUse) {
+		(solverUseMode == 1 || solverUseMode == 2) ? bIsLocked = true : bIsLocked = false;
+		FVector transformVector = cameraComp->GetForwardVector() * 300 + GetMesh()->GetComponentLocation();
 		switch (solverUseMode) {
 			case 0:
 				if (otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(false);
 				otherMainMesh->SetWorldLocation(transformVector);
 				break;
+			case 1:
+				otherMainMesh->SetWorldRotation(FRotator(mouseXY.Y, mouseXY.X, otherMainMesh->GetComponentRotation().Roll));
+				break;
 			default:
 				return;
 		}
-	}
-	else {
-		if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
 	}
 }
 

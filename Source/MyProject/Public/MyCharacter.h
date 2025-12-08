@@ -48,11 +48,11 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool bCanDash;
 
-	UPROPERTY(BlueprintReadWrite)
-	bool bPickupState;
+	//UPROPERTY(BlueprintReadWrite)
+	//bool bPickupState;
 
-	UPROPERTY(BlueprintReadWrite)
-	bool bPreviousPickupState;
+	//UPROPERTY(BlueprintReadWrite)
+	//bool bPreviousPickupState;
 
 	UPROPERTY(BlueprintReadWrite)
 	double range = 5000;
@@ -83,6 +83,12 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TObjectPtr<UStaticMeshComponent> otherSolverMesh;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsLocked;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector2D mouseXY;
 
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
