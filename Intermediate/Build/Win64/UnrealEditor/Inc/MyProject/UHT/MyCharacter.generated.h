@@ -28,6 +28,8 @@ class UMaterialInterface;
 	DECLARE_FUNCTION(execShoot); \
 	DECLARE_FUNCTION(execFly); \
 	DECLARE_FUNCTION(execDash); \
+	DECLARE_FUNCTION(execLookUp); \
+	DECLARE_FUNCTION(execLookAround); \
 	DECLARE_FUNCTION(execMoveAlongUpVector); \
 	DECLARE_FUNCTION(execMoveAlongRightVector); \
 	DECLARE_FUNCTION(execMoveAlongForwardVector);

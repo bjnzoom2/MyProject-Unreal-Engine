@@ -39,6 +39,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	APlayerController* PC;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="C++ Components")
 	TObjectPtr<UCameraComponent> cameraComp;
 
@@ -85,10 +88,13 @@ public:
 	TObjectPtr<UStaticMeshComponent> otherSolverMesh;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool bIsLocked;
+	double minScale;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FVector2D mouseXY;
+	double maxScale;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsLocked;
 
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongForwardVector(float AxisValue);
@@ -98,6 +104,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void MoveAlongUpVector(float AxisValue);
+
+	UFUNCTION(BlueprintCallable)
+	void LookAround(float AxisValue);
+
+	UFUNCTION(BlueprintCallable)
+	void LookUp(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
 	void Dash();
