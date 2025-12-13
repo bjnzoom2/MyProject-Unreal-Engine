@@ -6,6 +6,7 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "MyProject/Public/MyCharacter.h"
+#include "InputCoreTypes.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 // Cross Module References
@@ -17,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMesh_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
+	INPUTCORE_API UScriptStruct* Z_Construct_UScriptStruct_FKey();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter();
 	MYPROJECT_API UClass* Z_Construct_UClass_AMyCharacter_NoRegister();
 	MYPROJECT_API UEnum* Z_Construct_UEnum_MyProject_ESolverMode();
@@ -79,6 +81,14 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_ESolverMode.InnerSingleton, Z_Construct_UEnum_MyProject_ESolverMode_Statics::EnumParams);
 		}
 		return Z_Registration_Info_UEnum_ESolverMode.InnerSingleton;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execSolverEdit)
+	{
+		P_GET_STRUCT(FKey,Z_Param_key);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SolverEdit(Z_Param_key);
+		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execSolverUse)
 	{
@@ -192,6 +202,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "MoveAlongRightVector", &AMyCharacter::execMoveAlongRightVector },
 			{ "MoveAlongUpVector", &AMyCharacter::execMoveAlongUpVector },
 			{ "Shoot", &AMyCharacter::execShoot },
+			{ "SolverEdit", &AMyCharacter::execSolverEdit },
 			{ "SolverUse", &AMyCharacter::execSolverUse },
 			{ "SolverUseMesh", &AMyCharacter::execSolverUseMesh },
 			{ "SwitchSolverMode", &AMyCharacter::execSwitchSolverMode },
@@ -484,6 +495,40 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics
+	{
+		struct MyCharacter_eventSolverEdit_Parms
+		{
+			FKey key;
+		};
+		static const UECodeGen_Private::FStructPropertyParams NewProp_key;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::NewProp_key = { "key", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventSolverEdit_Parms, key), Z_Construct_UScriptStruct_FKey, METADATA_PARAMS(0, nullptr) }; // 46000949
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::NewProp_key,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "SolverEdit", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::MyCharacter_eventSolverEdit_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::MyCharacter_eventSolverEdit_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AMyCharacter_SolverEdit()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_SolverEdit_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AMyCharacter_SolverUse_Statics
 	{
 #if WITH_METADATA
@@ -679,6 +724,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
 		{ &Z_Construct_UFunction_AMyCharacter_Shoot, "Shoot" }, // 3108240336
+		{ &Z_Construct_UFunction_AMyCharacter_SolverEdit, "SolverEdit" }, // 2189164338
 		{ &Z_Construct_UFunction_AMyCharacter_SolverUse, "SolverUse" }, // 2957201540
 		{ &Z_Construct_UFunction_AMyCharacter_SolverUseMesh, "SolverUseMesh" }, // 3923610882
 		{ &Z_Construct_UFunction_AMyCharacter_SwitchSolverMode, "SwitchSolverMode" }, // 3632513572
@@ -900,9 +946,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ ESolverMode_StaticEnum, TEXT("ESolverMode"), &Z_Registration_Info_UEnum_ESolverMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2294366891U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1030733041U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1561949291U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2414150300(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2985526329(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo));

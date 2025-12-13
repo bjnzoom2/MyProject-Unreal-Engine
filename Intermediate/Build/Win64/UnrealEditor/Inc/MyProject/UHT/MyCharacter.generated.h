@@ -10,6 +10,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UMaterialInterface;
+struct FKey;
 #ifdef MYPROJECT_MyCharacter_generated_h
 #error "MyCharacter.generated.h already included, missing '#pragma once' in MyCharacter.h"
 #endif
@@ -20,6 +21,7 @@ class UMaterialInterface;
 #define FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_25_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execSolverEdit); \
 	DECLARE_FUNCTION(execSolverUse); \
 	DECLARE_FUNCTION(execSolverUseMesh); \
 	DECLARE_FUNCTION(execMeshCheck); \

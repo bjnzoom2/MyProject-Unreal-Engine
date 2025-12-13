@@ -137,4 +137,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SolverUse();
+
+	UFUNCTION(BlueprintCallable)
+	void SolverEdit(FKey key);
 };

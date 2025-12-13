@@ -303,9 +303,24 @@ void AMyCharacter::SolverUse()
 				if (otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(false);
 				// Logic is handled in LookAround and LookUp functions
 				break;
+			case 3:
+				if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
+
+				break;
 			default:
 				return;
 		}
+	}
+}
+
+void AMyCharacter::SolverEdit(FKey key)
+{
+	if (!bSolverUse || solverUseMode != ESolverMode::Edit || !otherActor) return;
+	if (key.GetFName() == "T") {
+		FTransform otherActorTransform = otherMainMesh->GetComponentTransform();
+		FActorSpawnParameters params;
+		params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+		GetWorld()->SpawnActor(otherActor->GetClass(), &otherActorTransform, params);
 	}
 }
 
