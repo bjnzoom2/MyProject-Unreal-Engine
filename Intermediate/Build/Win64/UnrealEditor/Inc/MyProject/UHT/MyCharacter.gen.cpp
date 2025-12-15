@@ -127,11 +127,12 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->ActivateSolver();
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(AMyCharacter::execShoot)
+	DEFINE_FUNCTION(AMyCharacter::execGetOtherActor)
 	{
+		P_GET_OBJECT(UMaterialInterface,Z_Param_outline);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->Shoot();
+		P_THIS->GetOtherActor(Z_Param_outline);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execFly)
@@ -195,13 +196,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "ActivateSolver", &AMyCharacter::execActivateSolver },
 			{ "Dash", &AMyCharacter::execDash },
 			{ "Fly", &AMyCharacter::execFly },
+			{ "GetOtherActor", &AMyCharacter::execGetOtherActor },
 			{ "LookAround", &AMyCharacter::execLookAround },
 			{ "LookUp", &AMyCharacter::execLookUp },
 			{ "MeshCheck", &AMyCharacter::execMeshCheck },
 			{ "MoveAlongForwardVector", &AMyCharacter::execMoveAlongForwardVector },
 			{ "MoveAlongRightVector", &AMyCharacter::execMoveAlongRightVector },
 			{ "MoveAlongUpVector", &AMyCharacter::execMoveAlongUpVector },
-			{ "Shoot", &AMyCharacter::execShoot },
 			{ "SolverEdit", &AMyCharacter::execSolverEdit },
 			{ "SolverUse", &AMyCharacter::execSolverUse },
 			{ "SolverUseMesh", &AMyCharacter::execSolverUseMesh },
@@ -278,6 +279,40 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_Fly_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics
+	{
+		struct MyCharacter_eventGetOtherActor_Parms
+		{
+			UMaterialInterface* outline;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_outline;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::NewProp_outline = { "outline", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventGetOtherActor_Parms, outline), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::NewProp_outline,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetOtherActor", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::MyCharacter_eventGetOtherActor_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::MyCharacter_eventGetOtherActor_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AMyCharacter_GetOtherActor()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetOtherActor_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -470,28 +505,6 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
-	struct Z_Construct_UFunction_AMyCharacter_Shoot_Statics
-	{
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/MyCharacter.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_Shoot_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "Shoot", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_Shoot_Statics::Function_MetaDataParams) };
-	UFunction* Z_Construct_UFunction_AMyCharacter_Shoot()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_Shoot_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -717,13 +730,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_ActivateSolver, "ActivateSolver" }, // 1683464538
 		{ &Z_Construct_UFunction_AMyCharacter_Dash, "Dash" }, // 1614259173
 		{ &Z_Construct_UFunction_AMyCharacter_Fly, "Fly" }, // 2485847123
+		{ &Z_Construct_UFunction_AMyCharacter_GetOtherActor, "GetOtherActor" }, // 2908287618
 		{ &Z_Construct_UFunction_AMyCharacter_LookAround, "LookAround" }, // 3444088003
 		{ &Z_Construct_UFunction_AMyCharacter_LookUp, "LookUp" }, // 3410200517
 		{ &Z_Construct_UFunction_AMyCharacter_MeshCheck, "MeshCheck" }, // 1537854590
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongForwardVector, "MoveAlongForwardVector" }, // 3871623889
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongRightVector, "MoveAlongRightVector" }, // 321678148
 		{ &Z_Construct_UFunction_AMyCharacter_MoveAlongUpVector, "MoveAlongUpVector" }, // 575698247
-		{ &Z_Construct_UFunction_AMyCharacter_Shoot, "Shoot" }, // 3108240336
 		{ &Z_Construct_UFunction_AMyCharacter_SolverEdit, "SolverEdit" }, // 2189164338
 		{ &Z_Construct_UFunction_AMyCharacter_SolverUse, "SolverUse" }, // 2957201540
 		{ &Z_Construct_UFunction_AMyCharacter_SolverUseMesh, "SolverUseMesh" }, // 3923610882
@@ -946,9 +959,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ ESolverMode_StaticEnum, TEXT("ESolverMode"), &Z_Registration_Info_UEnum_ESolverMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2294366891U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1561949291U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 926930121U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_2985526329(TEXT("/Script/MyProject"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_1969503103(TEXT("/Script/MyProject"),
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_luken_OneDrive_Documents_Unreal_Projects_MyProject_Source_MyProject_Public_MyCharacter_h_Statics::EnumInfo));

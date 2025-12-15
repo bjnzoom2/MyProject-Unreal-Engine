@@ -121,7 +121,7 @@ public:
 	void Fly();
 
 	UFUNCTION(BlueprintCallable)
-	void Shoot();
+	void GetOtherActor(UMaterialInterface* outline);
 
 	UFUNCTION(BlueprintCallable)
 	void ActivateSolver();

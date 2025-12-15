@@ -191,22 +191,21 @@ void AMyCharacter::Fly()
 	}
 }
 
-void AMyCharacter::Shoot()
+void AMyCharacter::GetOtherActor(UMaterialInterface* outline)
 {
-	TArray<FHitResult> hits;
+	FHitResult hit;
 	FVector startPos = springArmComp->GetComponentLocation();
 	FVector endPos = cameraComp->GetForwardVector() * range + startPos;
-	bool bHit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), startPos, endPos, 30.0f, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hits, true);
+	bool bHit = UKismetSystemLibrary::LineTraceSingle(GetWorld(), startPos, endPos, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hit, true);
 	if (bHit) {
-		UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_IntToString(hits.Num()));
-		for (FHitResult& hit : hits) {
-			UKismetSystemLibrary::PrintString(this, UKismetStringLibrary::Conv_NameToString(hit.GetActor()->GetFName()));
-			if (hit.GetComponent()->IsSimulatingPhysics()) {
-				FVector hitLocation = hit.Location;
-				FVector componentLocation = hit.GetComponent()->GetComponentLocation();
-				hit.GetComponent()->AddImpulse((componentLocation - hitLocation).GetSafeNormal() * 2000, NAME_None, true);
-			}
+		if (Cast<UStaticMesh>(hit.GetActor())) return;
+		if (otherActor) {
+			if (otherMainMesh) otherMainMesh->SetOverlayMaterial(nullptr);
+			otherActor = nullptr;
 		}
+		otherActor = hit.GetActor();
+		MeshCheck();
+		if (otherMainMesh) otherMainMesh->SetOverlayMaterial(outline);
 	}
 }
 
@@ -219,10 +218,12 @@ void AMyCharacter::ActivateSolver()
 	}
 	else {
 		solverMeshComp->SetStaticMesh(nullptr);
-		otherSolverMesh->DestroyComponent();
+		if (otherSolverMesh) otherSolverMesh->DestroyComponent();
 		otherSolverMesh = nullptr;
-		otherMainMesh->SetOverlayMaterial(nullptr);
-		if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
+		if (otherMainMesh) {
+			otherMainMesh->SetOverlayMaterial(nullptr);
+			if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
+		}
 		otherMainMesh = nullptr;
 		otherActor = nullptr;
 		bSolverUse = false;
@@ -258,7 +259,7 @@ void AMyCharacter::MeshCheck()
 
 void AMyCharacter::SolverUseMesh(UMaterialInterface* outline)
 {
-	if (!bSolverActivated || !otherActor || Cast<APawn>(otherActor)) return;
+	if (!bSolverActivated || !otherActor || Cast<APawn>(otherActor) || !otherMainMesh) return;
 	MeshCheck();
 
 	if (!otherSolverMesh) {

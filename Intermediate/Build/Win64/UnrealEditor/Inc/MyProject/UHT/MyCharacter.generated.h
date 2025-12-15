@@ -27,7 +27,7 @@ struct FKey;
 	DECLARE_FUNCTION(execMeshCheck); \
 	DECLARE_FUNCTION(execSwitchSolverMode); \
 	DECLARE_FUNCTION(execActivateSolver); \
-	DECLARE_FUNCTION(execShoot); \
+	DECLARE_FUNCTION(execGetOtherActor); \
 	DECLARE_FUNCTION(execFly); \
 	DECLARE_FUNCTION(execDash); \
 	DECLARE_FUNCTION(execLookUp); \
