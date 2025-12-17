@@ -35,6 +35,7 @@ void AMyCharacter::BeginPlay()
 void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	SolverUse();
 	if (bSolverUse) {
 		(solverUseMode == 1 || solverUseMode == 2) ? bIsLocked = true : bIsLocked = false;
 	}
@@ -198,7 +199,7 @@ void AMyCharacter::GetOtherActor(UMaterialInterface* outline)
 	FVector endPos = cameraComp->GetForwardVector() * range + startPos;
 	bool bHit = UKismetSystemLibrary::LineTraceSingle(GetWorld(), startPos, endPos, UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility), false, TArray<AActor*>(), EDrawDebugTrace::Persistent, hit, true);
 	if (bHit) {
-		if (Cast<UStaticMesh>(hit.GetActor())) return;
+		if (hit.GetComponent()->GetFName() == "StaticMeshComponent0") return;
 		if (otherActor) {
 			if (otherMainMesh) otherMainMesh->SetOverlayMaterial(nullptr);
 			otherActor = nullptr;
@@ -268,7 +269,7 @@ void AMyCharacter::SolverUseMesh(UMaterialInterface* outline)
 		otherSolverMesh->SetStaticMesh(solverMeshes[static_cast<int>(solverMode)]);
 		otherSolverMesh->SetupAttachment(otherMainMesh);
 		otherSolverMesh->SetWorldScale3D(otherMainMesh->GetComponentScale() + FVector(2.0));
-		otherSolverMesh->RegisterComponent();
+		otherSolverMesh->RegisterComponent(); 
 		bSolverUse = true;
 		solverUseMode = solverMode;
 	}
