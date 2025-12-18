@@ -202,6 +202,9 @@ void AMyCharacter::GetOtherActor(UMaterialInterface* outline)
 		if (hit.GetComponent()->GetFName() == "StaticMeshComponent0") return;
 		if (otherActor) {
 			if (otherMainMesh) otherMainMesh->SetOverlayMaterial(nullptr);
+			if (otherSolverMesh) otherSolverMesh->DestroyComponent();
+			otherMainMesh = nullptr;
+			otherSolverMesh = nullptr;
 			otherActor = nullptr;
 		}
 		otherActor = hit.GetActor();
@@ -221,13 +224,14 @@ void AMyCharacter::ActivateSolver()
 		solverMeshComp->SetStaticMesh(nullptr);
 		if (otherSolverMesh) otherSolverMesh->DestroyComponent();
 		otherSolverMesh = nullptr;
-		if (otherMainMesh) {
+		/*if (otherMainMesh) {
 			otherMainMesh->SetOverlayMaterial(nullptr);
 			if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
 		}
 		otherMainMesh = nullptr;
-		otherActor = nullptr;
+		otherActor = nullptr;*/
 		bSolverUse = false;
+		solverUseMode = ESolverMode::None;
 	}
 }
 
@@ -281,10 +285,10 @@ void AMyCharacter::SolverUseMesh(UMaterialInterface* outline)
 	else {
 		otherSolverMesh->DestroyComponent();
 		otherSolverMesh = nullptr;
-		otherMainMesh->SetOverlayMaterial(nullptr);
+		/*otherMainMesh->SetOverlayMaterial(nullptr);
 		if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
 		otherMainMesh = nullptr;
-		otherActor = nullptr;
+		otherActor = nullptr;*/
 		bSolverUse = false;
 		solverUseMode = ESolverMode::None;
 	}
@@ -307,7 +311,7 @@ void AMyCharacter::SolverUse()
 				break;
 			case 3:
 				if (!otherMainMesh->IsSimulatingPhysics()) otherMainMesh->SetSimulatePhysics(true);
-
+				// Logic is handled in SolverEdit function
 				break;
 			default:
 				return;
@@ -317,8 +321,20 @@ void AMyCharacter::SolverUse()
 
 void AMyCharacter::SolverEdit(FKey key)
 {
-	if (!bSolverUse || solverUseMode != ESolverMode::Edit || !otherActor) return;
-	if (key.GetFName() == "T") {
+	if (!bSolverActivated) return;
+	if (key.GetFName() == "T" && solverMode == ESolverMode::Edit) {
+		FVector lookVector = cameraComp->GetForwardVector() * 300 + GetMesh()->GetComponentLocation();
+		FActorSpawnParameters params;
+		params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+		AActor* newActor = GetWorld()->SpawnActor<AActor>(lookVector, FRotator::ZeroRotator, params);
+		UStaticMeshComponent* otherMesh = NewObject<UStaticMeshComponent>(newActor, "StaticMesh");
+		otherMesh->SetMobility(EComponentMobility::Movable);
+		otherMesh->SetSimulatePhysics(true);
+		otherMesh->SetStaticMesh(shapeMeshes[1]);
+		otherMesh->SetWorldLocation(lookVector);
+		newActor->SetRootComponent(otherMesh);
+		otherMesh->RegisterComponent();
+	} else if (key.GetFName() == "Y" && bSolverUse && solverUseMode == ESolverMode::Edit && otherActor) {
 		FTransform otherActorTransform = otherMainMesh->GetComponentTransform();
 		FActorSpawnParameters params;
 		params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

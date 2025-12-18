@@ -78,6 +78,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Meshes")
 	TArray<TObjectPtr<UStaticMesh>> solverMeshes;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Meshes")
+	TArray<TObjectPtr<UStaticMesh>> shapeMeshes;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "C++ Actors")
 	TObjectPtr<AActor> otherActor;
 
